@@ -24,6 +24,8 @@ function setup() {
 	yVelSlider = createSlider(-10, 10, 0);
 	xVelSlider.position(550, 80);
 	yVelSlider.position(550, 110)
+    aVelSlider = createSlider(-20, 20, 0);
+    aVelSlider.position(700, 120)
 	hueSlider = createSlider(0,100);
 	hueSlider.position(550, 140);
 	satSlider = createSlider(0,100, 90);
@@ -120,9 +122,10 @@ function elliptical(size, rec){
             pop();
             if(symPlanes > 1){
 			push();
-                
+             
 			fill(noise(yPos[i]/100)*(hueVal/2), satVal, briVal)
 			translate(width - xPos[i], yPos[i]);
+                
 			 rotate(-a);
              if (shapeDepth >=1){   
 			rect(0,0, noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(a/1000));
@@ -134,29 +137,37 @@ function elliptical(size, rec){
                 
 			pop();
             }
-			a+=0.0001;
+			a+=0.0001 *aVelSlider.value();
             if(symPlanes > 2){
-			fill(noise(yPos[i]/100)*(hueVal/2), satVal, briVal)
-            if (shapeDepth >=1){
-			rect(yPos[i], xPos[i], noise(yPos[i]/10)*size*sin(millis()/1000),
+                 fill(noise(yPos[i]/100)*(hueVal/2), satVal, briVal)
+                push();
+                translate(yPos[i],xPos[i]);
+                 rotate(a);  
+			    
+                if (shapeDepth >=1){
+			         rect(0,0, noise(yPos[i]/10)*size*sin(millis()/1000),
                  
-                 noise(yPos[i]/10)*size*cos(millis()/1000));
-            }
-            if (shapeDepth <=1){
-                ellipse(yPos[i], xPos[i], noise(yPos[i]/10)*size*sin(millis()/1000),
+                        noise(yPos[i]/10)*size*cos(millis()/1000));
+                }
+                if (shapeDepth <=1){
+                    ellipse(0,0, noise(yPos[i]/10)*size*sin(millis()/1000),
                  
-                 noise(yPos[i]/10)*size*cos(millis()/1000));
-            }
+                        noise(yPos[i]/10)*size*cos(millis()/1000));
+                }
+                pop();
             }
             
             if(symPlanes >3 ) {
+                push();
+                translate(width - yPos[i], xPos[i])
+                rotate(-a);
                 if(shapeDepth >= 1){
-			 rect(width - yPos[i], xPos[i], noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(millis()/1000));
+			 rect(0,0, noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(millis()/1000));
                 }
                 if(shapeDepth <= 1) {
-                    ellipse(width - yPos[i], xPos[i], noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(millis()/1000));
+                    ellipse(0,0, noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(millis()/1000));
                 }
-                    
+                pop();    
             }
          
 
