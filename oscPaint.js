@@ -30,8 +30,11 @@ function setup() {
 	satSlider.position(550, 180);
 	briSlider = createSlider(0,100, 80);
 	briSlider.position(550, 220);
-    lengthSlider = createSlider(0,150);
+    lengthSlider = createSlider(0,300);
+    
     lengthSlider.position(550, 260);
+    shapeSlider = createSlider(0,2);
+    shapeSlider.position(700, 90);
 	button1 = createButton('Redraw');
 	radSlider.class("slider")
 	radSlider.id("size")
@@ -77,6 +80,7 @@ function mouseDragged(){
 
 }
 function elliptical(size, rec){
+    var shapeDepth = shapeSlider.value();
 	hueVal = hueSlider.value();
 	var satVal = satSlider.value();
 	var briVal = briSlider.value();
@@ -105,25 +109,54 @@ function elliptical(size, rec){
   			rotate(a);
 
 				fill(noise(yPos[i]/100)*(hueVal), satVal, briVal);
+            if (shapeDepth >=1){
+				rect(0,0, noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(a/1000));
+			
+            }
+            if (shapeDepth <=1){
+                ellipse(0,0, noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(a/1000));
             
-				ellipse(0,0, noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(a/1000));
-			pop();
+            }
+            pop();
             if(symPlanes > 1){
 			push();
+                
 			fill(noise(yPos[i]/100)*(hueVal/2), satVal, briVal)
 			translate(width - xPos[i], yPos[i]);
 			 rotate(-a);
-
-			ellipse(0,0, noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(a/1000));
+             if (shapeDepth >=1){   
+			rect(0,0, noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(a/1000));
+             }
+                if(shapeDepth<=1) 
+                {
+                    ellipse(0,0, noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(a/1000));
+             }
+                
 			pop();
             }
 			a+=0.0001;
             if(symPlanes > 2){
 			fill(noise(yPos[i]/100)*(hueVal/2), satVal, briVal)
-			ellipse(yPos[i], xPos[i], noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(millis()/1000));
+            if (shapeDepth >=1){
+			rect(yPos[i], xPos[i], noise(yPos[i]/10)*size*sin(millis()/1000),
+                 
+                 noise(yPos[i]/10)*size*cos(millis()/1000));
             }
+            if (shapeDepth <=1){
+                ellipse(yPos[i], xPos[i], noise(yPos[i]/10)*size*sin(millis()/1000),
+                 
+                 noise(yPos[i]/10)*size*cos(millis()/1000));
+            }
+            }
+            
             if(symPlanes >3 ) {
-			 ellipse(width - yPos[i], xPos[i], noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(millis()/1000));
+                if(shapeDepth >= 1){
+			 rect(width - yPos[i], xPos[i], noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(millis()/1000));
+                }
+                if(shapeDepth <= 1) {
+                    ellipse(width - yPos[i], xPos[i], noise(yPos[i]/10)*size*sin(millis()/1000), noise(yPos[i]/10)*size*cos(millis()/1000));
+                }
+                    
             }
          
 
