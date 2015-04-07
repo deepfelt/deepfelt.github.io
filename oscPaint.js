@@ -35,7 +35,7 @@ function setup() {
     lengthSlider = createSlider(0,300);
     
     lengthSlider.position(550, 260);
-    shapeSlider = createSlider(0,2);
+    shapeSlider = createSlider(0,2,0);
     shapeSlider.position(700, 90);
 	button1 = createButton('Redraw');
 	radSlider.class("slider")
