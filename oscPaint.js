@@ -4,7 +4,7 @@ var sound, amplitude;
 var lifespan;
 var radius;
 var hue;
-var a = Math.PI / 10;
+var a = 0;
 var button;
 var bg = true;
 
@@ -35,7 +35,7 @@ function setup() {
     lengthSlider = createSlider(0,300);
     
     lengthSlider.position(550, 260);
-    shapeSlider = createSlider(0,2,0);
+    shapeSlider = createSlider(0,2,2);
     shapeSlider.position(700, 90);
 	button1 = createButton('Redraw');
 	radSlider.class("slider")
