@@ -125,7 +125,7 @@ function fluctuator(size, rec){
             	{
 			push();
              
-			fill(noise(yPos[i]/100)*(hueVal/2), satVal, briVal)
+			fill(noise(yPos[i]/100)*(hueVal), satVal, briVal)
 			translate(width - xPos[i], yPos[i]);
                 
 			 rotate(-a);
@@ -143,7 +143,7 @@ function fluctuator(size, rec){
 		a+=0.0001 *aVelSlider.value();
             	if(symPlanes > 2)
             	{
-                 	fill(noise(yPos[i]/100)*(hueVal/2), satVal, briVal)
+                 	fill(noise(yPos[i]/100)*(hueVal), satVal, briVal)
                 	push();
                 	translate(yPos[i],xPos[i]);
                  	rotate(a);  
