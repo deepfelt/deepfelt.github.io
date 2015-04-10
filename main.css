@@ -3,8 +3,6 @@
 
 	background: #000000;
 }
-button { 
-color: #fff;
 
 input[type=range] {
   -webkit-appearance: none;
@@ -113,6 +111,9 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 input[type=range]:focus::-ms-track {
   background: #ccc;
+}
+button { 
+color: #fff;
 }
 
 button {
