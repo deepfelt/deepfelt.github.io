@@ -157,7 +157,7 @@ function fluctuator(size, rec){
                         	noise(yPos[i]/10)*size*cos(millis()/1000));
                 }
                 pop();
-            }
+           
             
             
                 push();
@@ -171,7 +171,7 @@ function fluctuator(size, rec){
                 }
                 pop();    
             }
-         
+	}
 
 		}
 
