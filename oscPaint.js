@@ -62,8 +62,7 @@ function draw(){
 		background(0);
 	}
 
-	fill(0,50);
-	// rect(0,0,width, height);
+
 	stroke(0);
 	radius = radSlider.value()
 	fluctuator(radius);
