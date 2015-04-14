@@ -1,8 +1,40 @@
 * {
-
-
-	background: #000000;
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 10px;
+    text-align: center;
+    background: #000000;
+    color: #a09f9f;
+    text-transform: uppercase;
+   
 }
+/* --------------------------------------------------
+Container
+-------------------------------------------------- */
+div#container, div.container { position: relative; width: 940px; margin: 0 auto; padding: 0; }
+ 
+ 
+/* --------------------------------------------------
+Grid
+-------------------------------------------------- */
+.column-row, .row { margin: 0 0 18px -20px; }
+.column, .columns { float: left; display: inline; margin: 0 0 0 20px; }
+ 
+.one { width: 300px; }
+.two { width: 620px; }
+.three { width: 940px; }
+ 
+.offset-by-one-half { margin-left: 160px; }
+.offset-by-one { margin-left: 320px; }
+ 
+/* Clear the columns automagically, thanks @kneath */
+.column-row:after, .row:after, .clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+* html .column-row, * html .row, * html .clearfix { height: 1%; }
+.column-row, .row, .clearfix { display: inline-block; }
+.column-row, .row, .clearfix { display: block; }
+ 
+/* IE6 Problems ---------- */
+body.ie .column-row { width: 960px; }
+body.ie .two-thirds .column-row { width: 2580px; }
 
 input[type=range] {
   -webkit-appearance: none;
@@ -112,54 +144,18 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 input[type=range]:focus::-ms-track {
   background: #ccc;
 }
-button { 
-color: #fff;
-}
 
-button {
-	-moz-box-shadow: 0px 1px 0px 0px #1c1b18;
-	-webkit-box-shadow: 0px 1px 0px 0px #1c1b18;
-	box-shadow: 0px 1px 0px 0px #1c1b18;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #eae0c2), color-stop(1, #ccc2a6));
-	background:-moz-linear-gradient(top, #eae0c2 5%, #ccc2a6 100%);
-	background:-webkit-linear-gradient(top, #eae0c2 5%, #ccc2a6 100%);
-	background:-o-linear-gradient(top, #eae0c2 5%, #ccc2a6 100%);
-	background:-ms-linear-gradient(top, #eae0c2 5%, #ccc2a6 100%);
-	background:linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eae0c2', endColorstr='#ccc2a6',GradientType=0);
-	background-color:#eae0c2;
-	-moz-border-radius:15px;
-	-webkit-border-radius:15px;
-	border-radius:15px;
-	border:2px solid #333029;
-	display:inline-block;
-	cursor:pointer;
-	color:#505739;
-	font-family:arial;
-	font-size:14px;
-	font-weight:bold;
-	padding:12px 16px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #ffffff;
-}
-button:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ccc2a6), color-stop(1, #eae0c2));
-	background:-moz-linear-gradient(top, #ccc2a6 5%, #eae0c2 100%);
-	background:-webkit-linear-gradient(top, #ccc2a6 5%, #eae0c2 100%);
-	background:-o-linear-gradient(top, #ccc2a6 5%, #eae0c2 100%);
-	background:-ms-linear-gradient(top, #ccc2a6 5%, #eae0c2 100%);
-	background:linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ccc2a6', endColorstr='#eae0c2',GradientType=0);
-	background-color:#ccc2a6;
-}
-button:active {
-	position:relative;
-	top:1px;
-}
 
+ul{
+ list-style-type: none;
+    text-align: 
+}
+#canvas-container{
+ position: absolute;
+   left:5%;
+    
+}
 canvas{
-	cursor:crosshair;
-	margin-left:50 ;
-	margin-right: 50;
-	margin-top: 100;
+   
+border: inset 4px;
 }
