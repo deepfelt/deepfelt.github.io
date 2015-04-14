@@ -11,6 +11,7 @@ var osc;
 var freq;
 var canvas;
 var redraw;
+var strokeWeight;
 
 function setup() {
     "use strict";
@@ -40,7 +41,7 @@ function draw() {
     //        osc.freq(freq);
 
 
-    stroke(0);
+
     radius = radSlider.value()
     fluctuator(radius);
     if (xPos.length > 0) {
@@ -64,32 +65,31 @@ function guiSetup() {
 
     radSlider = createSlider(10, 500);
     radSlider.parent("radius");
-    symSlider = createSlider(1, 4, 4);
+     symSlider = createSlider(1, 4, 4);
     symSlider.parent("symmetry");
-    xVelSlider = createSlider(-10, 10, 0);
+     xVelSlider = createSlider(-10, 10, 0);
     xVelSlider.parent("xvel");
-    yVelSlider = createSlider(-10, 10, 0);
+     yVelSlider = createSlider(-10, 10, 0);
     yVelSlider.parent("yvel");
-    aVelSlider = createSlider(-20, 20, 0);
+     aVelSlider = createSlider(-20, 20, 0);
     aVelSlider.parent("avel");
-    hueSlider = createSlider(0, 100);
+     lengthSlider = createSlider(0, 300);
+    lengthSlider.parent("len");
+    shapeSlider = createSlider(0, 2, 2);
+    shapeSlider.parent("shape");
+
+    hueSlider = createSlider(0, 255);
     hueSlider.parent("hue");
     satSlider = createSlider(0, 100, 90);
     satSlider.parent("sat");
     briSlider = createSlider(0, 100, 80);
     briSlider.parent("bri");
-    lengthSlider = createSlider(0, 300);
-    lengthSlider.parent("len");
-    shapeSlider = createSlider(0, 2, 2);
-    shapeSlider.parent("shape");
-
-
-
-
-
-
-
-
+    alphaSlider = createSlider(0,100,100);
+    alphaSlider.parent("alpha");
+    strokeSlider = createSlider(0, 100, 2);
+    strokeSlider.parent("swt");
+    strokeAlpha = createSlider(0,100,100);
+    strokeAlpha.parent("skalpha");
 
 }
 
@@ -111,6 +111,10 @@ function fluctuator(size, rec) {
     var briVal = briSlider.value();
     var symPlanes = symSlider.value();
     var chainLength = lengthSlider.value();
+    var alpha = alphaSlider.value();
+    strokeWeight(strokeSlider.value()/10);
+    var skalpha = strokeAlpha.value();
+    stroke(0, skalpha);
     for (var i = 0; i < xPos.length; i++) {
 
         xPos[i] += xVelSlider.value() / 10;
@@ -127,7 +131,7 @@ function fluctuator(size, rec) {
         rectMode(CENTER);
         lifespan = 255;
         lifespan -= 1;
-        strokeWeight(0.5);
+        
         // noStroke();
 
         push();
@@ -135,7 +139,7 @@ function fluctuator(size, rec) {
         translate(xPos[i], yPos[i]);
         rotate(a);
 
-        fill(noise(yPos[i] / 1000) * (hueVal), satVal, briVal);
+        fill(noise(yPos[i] / 1000) * (hueVal), satVal, briVal, alpha);
         if (shapeDepth >= 1) {
             rect(0, 0, noise(yPos[i] / 10) * size * sin(millis() / 1000),
                 noise(yPos[i] / 10) * size *
@@ -155,7 +159,7 @@ function fluctuator(size, rec) {
         translate(xPos[i], yPos[i]);
         rotate(a);
 
-        fill(noise(yPos[i] / 1000) * (hueVal), satVal, briVal);
+        fill(noise(yPos[i] / 1000) * (hueVal), satVal, briVal, alpha);
         if (shapeDepth >= 1) {
             rect(0, 0, noise(yPos[i] / 10) * size * sin(millis() / 1000),
                 noise(yPos[i] / 10) * size *
@@ -172,7 +176,7 @@ function fluctuator(size, rec) {
         if (symPlanes > 1) {
             push();
 
-            fill(noise(yPos[i] / 1000) * (hueVal), satVal, briVal)
+            fill(noise(yPos[i] / 1000) * (hueVal), satVal, briVal, alpha)
             translate(width - xPos[i], yPos[i]);
 
             rotate(-a);
@@ -191,7 +195,7 @@ function fluctuator(size, rec) {
         }
         a += 0.0001 * aVelSlider.value();
         if (symPlanes > 2) {
-            fill(noise(yPos[i] / 100) * (hueVal), satVal, briVal)
+            fill(noise(yPos[i] / 100) * (hueVal), satVal, briVal, alpha)
             push();
             translate(yPos[i], xPos[i]);
             rotate(a);
