@@ -1,236 +1,130 @@
-var xPos = [];
-var yPos = [];
-var sound, amplitude;
-var lifespan;
-var radius;
-var hue;
-var a = 0;
-var button;
-var bg = true;
-var osc;
-var freq;
-var canvas;
-var redraw;
-var strokeWeight;
+<html>
 
-function setup() {
-    "use strict";
-    colorMode(HSB, 100);
-    canvas = createCanvas(600, 600);
-    canvas.parent('canvas-container');
-    background(0);
-    guiSetup();
+<head>
+    <title>Oscillation Painter</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="icon" href="favicon.ico">>
+    <link href='http://fonts.googleapis.com/css?family=Maven+Pro' rel='stylesheet' type='text/css'>
 
-     
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+ -->
 
-    //	 button1.parent('button-container');
-
-}
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+ -->
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ -->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 
 
+    <!-- uncomment lines below to include extra p5 libraries -->
+    <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.3/p5.min.js"></script>
+    <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.3/addons/p5.dom.min.js"></script>
+    <!--<script language="javascript" src="../addons/p5.sound.js"></script>-->
+    <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/ui-darkness/jquery-ui.min.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+    <script language="javascript" type="text/javascript" src="oscPaint.js"></script>
+    <script language="javascript" type="text/javascript" src="range_slider.js"></script>
+    <!-- this line removes any default padding and style. you might only need one of these values set. -->
+
+</head>
+
+<body>
+    <div id="dialog" title="Controls">
+        <div class="container">
+            <div class="row">
+                <div class="column one">
+                    <div id="radius">Radius
+                        <br>
+                    </div>
+                    <div id="symmetry">Symmetry
+                        <br>
+                    </div>
+                    <div id="xvel">X Velocity
+                        <br>
+                    </div>
+                    <div id="yvel">Y Velocity
+                        <br>
+                    </div>
+                    <div id="avel">Rotation
+                        <br>
+                    </div>
+                    <div id="swt"> Stroke Weight
+                        <br>
+                    </div>
+                    <div id="skalpha">Stroke opacity
+                        <br>
+                    </div>
+
+                </div>
+
+                <div class="column one">
+                    Redraw Background
+                    <br>
+                    <input type="radio" name="redraw" id="redrawOn">on
+
+                    <input type="radio" name="redraw" id="redrawOff">off
+                    <div id="hue">Hue
+                        <br>
+                    </div>
+
+                    <div id="sat">Saturation
+                        <br>
+                    </div>
+                    <div id="bri">Brightness
+                        <br>
+                    </div>
+
+                    <div id="shape">Shape
+                        <br>
+                    </div>
+                    <div id="alpha">
+                        Opacity
+                        <br>
+                    </div>
+
+                    <div id="len">Chain Length
+                        <br>
+                    </div>
+                </div>
+                 </div>
+                <div class="column one"></div>
 
 
-function draw() {
+            </div>
+        </div>
+        <div class="row">
 
-    //        freq = map(yPos[0], 0, height, 200, 300);
-
-    bg = document.getElementById("redrawOn").checked;
-
-    if (bg) {
-        background(0);
-    }
-    //        osc.freq(freq);
+            <div class="column three">
+                <div id="canvas-container">
 
 
+                </div>
 
-    radius = radSlider.value()
-    fluctuator(radius);
-    if (xPos.length > 0) {
-        console.log(xPos.length)
-    }
-}
+            </div>
+        </div>
 
-function mouseDragged() {
-    if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+   
 
-        xPos.push(mouseX);
-        yPos.push(mouseY);
-    }
-    // console.log(xPos, yPos)
+    <script>
+        /*
+         * jQuery UI Dialog: Change Dialog Position
+         * http://salman-w.blogspot.com/2013/05/jquery-ui-dialog-examples.html
+         */
+        $(function () {
+            $("#dialog").dialog({
+                resizable: true,
+				width: "50%",
+                position: {
+                    my: "right top",
+                    at: "right top",
+                    of: window
+                }
+            });
+        });
+    </script>
+</body>
 
-}
-
-
-function guiSetup() {
-
-
-    radSlider = createSlider(10, 500);
-    radSlider.parent("radius");
-     symSlider = createSlider(1, 4, 4);
-    symSlider.parent("symmetry");
-     xVelSlider = createSlider(-10, 10, 0);
-    xVelSlider.parent("xvel");
-     yVelSlider = createSlider(-10, 10, 0);
-    yVelSlider.parent("yvel");
-     aVelSlider = createSlider(-20, 20, 0);
-    aVelSlider.parent("avel");
-     lengthSlider = createSlider(0, 300);
-    lengthSlider.parent("len");
-    shapeSlider = createSlider(0, 2, 2);
-    shapeSlider.parent("shape");
-
-    hueSlider = createSlider(0, 255);
-    hueSlider.parent("hue");
-    satSlider = createSlider(0, 100, 90);
-    satSlider.parent("sat");
-    briSlider = createSlider(0, 100, 80);
-    briSlider.parent("bri");
-    alphaSlider = createSlider(0,100,100);
-    alphaSlider.parent("alpha");
-    strokeSlider = createSlider(0, 100, 2);
-    strokeSlider.parent("swt");
-    strokeAlpha = createSlider(0,100,100);
-    strokeAlpha.parent("skalpha");
-
-}
-
-function mousePressed() {
-    //     osc.stop(); 
-    //    osc.start();
-
-}
-
-function mouseReleased() {
-
-
-}
-
-function fluctuator(size, rec) {
-    var shapeDepth = shapeSlider.value();
-    hueVal = hueSlider.value();
-    var satVal = satSlider.value();
-    var briVal = briSlider.value();
-    var symPlanes = symSlider.value();
-    var chainLength = lengthSlider.value();
-    var alpha = alphaSlider.value();
-    strokeWeight(strokeSlider.value()/10);
-    var skalpha = strokeAlpha.value();
-    stroke(0, skalpha);
-    for (var i = 0; i < xPos.length; i++) {
-
-        xPos[i] += xVelSlider.value() / 10;
-        yPos[i] += yVelSlider.value() / 10;
-        if (yPos[0] > height + radius || xPos[0] > width + radius || yPos[0] <
-            0 - radius || xPos[0] < 0 -
-            radius ||
-            xPos.length > chainLength) {
-            yPos.shift();
-            xPos.shift();
-
-        }
-
-        rectMode(CENTER);
-        lifespan = 255;
-        lifespan -= 1;
-        
-        // noStroke();
-
-        push();
-        scale(-1);
-        translate(xPos[i], yPos[i]);
-        rotate(a);
-
-        fill(noise(yPos[i] / 1000) * (hueVal), satVal, briVal, alpha);
-        if (shapeDepth >= 1) {
-            rect(0, 0, noise(yPos[i] / 10) * size * sin(millis() / 1000),
-                noise(yPos[i] / 10) * size *
-                cos(a / 1000));
-
-        }
-        if (shapeDepth <= 1) {
-            ellipse(0, 0, noise(yPos[i] / 10) * size * sin(millis() / 1000),
-                noise(yPos[i] / 10) * size *
-                cos(a /
-                    1000));
-
-        }
-        pop();
-        push();
-
-        translate(xPos[i], yPos[i]);
-        rotate(a);
-
-        fill(noise(yPos[i] / 1000) * (hueVal), satVal, briVal, alpha);
-        if (shapeDepth >= 1) {
-            rect(0, 0, noise(yPos[i] / 10) * size * sin(millis() / 1000),
-                noise(yPos[i] / 10) * size *
-                cos(a / 1000));
-
-        }
-        if (shapeDepth <= 1) {
-            ellipse(0, 0, noise(yPos[i] / 10) * size * sin(millis() / 1000),
-                noise(yPos[i] / 10) * size *
-                cos(a / 1000));
-
-        }
-        pop();
-        if (symPlanes > 1) {
-            push();
-
-            fill(noise(yPos[i] / 1000) * (hueVal), satVal, briVal, alpha)
-            translate(width - xPos[i], yPos[i]);
-
-            rotate(-a);
-            if (shapeDepth >= 1) {
-                rect(0, 0, noise(yPos[i] / 10) * size * sin(millis() / 1000),
-                    noise(yPos[i] / 10) * size *
-                    cos(a / 1000));
-            }
-            if (shapeDepth <= 1) {
-                ellipse(0, 0, noise(yPos[i] / 10) * size * sin(millis() /
-                        1000), noise(yPos[i] / 10) *
-                    size * cos(a / 1000));
-            }
-
-            pop();
-        }
-        a += 0.0001 * aVelSlider.value();
-        if (symPlanes > 2) {
-            fill(noise(yPos[i] / 100) * (hueVal), satVal, briVal, alpha)
-            push();
-            translate(yPos[i], xPos[i]);
-            rotate(a);
-
-            if (shapeDepth >= 1) {
-                rect(0, 0, noise(yPos[i] / 10) * size * sin(millis() / 1000),
-                    noise(yPos[i] / 10) * size * cos(millis() / 1000));
-            }
-            if (shapeDepth <= 1) {
-                ellipse(0, 0, noise(yPos[i] / 10) * size * sin(millis() /
-                        1000),
-                    noise(yPos[i] / 10) * size * cos(millis() / 1000));
-            }
-            pop();
-
-
-
-            push();
-            translate(width - yPos[i], xPos[i])
-            rotate(-a);
-            if (shapeDepth >= 1) {
-                rect(0, 0, noise(yPos[i] / 10) * size * sin(millis() / 1000),
-                    noise(yPos[i] / 10) * size *
-                    cos(
-                        millis() / 1000));
-            }
-            if (shapeDepth <= 1) {
-                ellipse(0, 0, noise(yPos[i] / 10) * size * sin(millis() /
-                        1000), noise(yPos[i] / 10) *
-                    size * cos(
-                        millis() / 1000));
-            }
-            pop();
-        }
-    }
-
-}
+</html>
