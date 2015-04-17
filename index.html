@@ -2,10 +2,10 @@
 
 <head>
     <title>Oscillation Painter</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="icon" href="favicon.ico">>
+    <link rel="icon" href="favicon.ico">
     <link href='http://fonts.googleapis.com/css?family=Maven+Pro' rel='stylesheet' type='text/css'>
 
+    <!-- Latest compiled and minified CSS -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
  -->
 
@@ -15,7 +15,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
  -->
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 
 
     <!-- uncomment lines below to include extra p5 libraries -->
@@ -25,37 +25,41 @@
     <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/ui-darkness/jquery-ui.min.css" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-    <script language="javascript" type="text/javascript" src="oscPaint.min.js"></script>
-    <script language="javascript" type="text/javascript" src="range_slider.js"></script>
+    <script language="javascript" type="text/javascript" src="oscPaint.js"></script>
     <!-- this line removes any default padding and style. you might only need one of these values set. -->
 
 </head>
 
 <body>
-    <div id="dialog" title="Controls">
+    <div id="dialog" title="Oscillation Painter">
         <div class="container">
             <div class="row">
                 <div class="column one">
-                    <div id="radius">Radius
-                        <br>
+                    <div id="radlabel"></div>
+                    <div id="radius">
+
                     </div>
                     <div id="symmetry">Symmetry
                         <br>
                     </div>
-                    <div id="xvel">X Velocity
-                        <br>
+                    <div id="xvlabel"></div>
+                    <div id="xvel">
+
                     </div>
-                    <div id="yvel">Y Velocity
-                        <br>
+                    <div id="yvlabel"></div>
+                    <div id="yvel">
+
                     </div>
-                    <div id="avel">Rotation
-                        <br>
+                    <div id="avlabel"></div>
+                    <div id="avel">
                     </div>
-                    <div id="swt"> Stroke Weight
-                        <br>
+                    <div id="swtlabel"></div>
+                    <div id="swt">
                     </div>
-                    <div id="skalpha">Stroke opacity
-                        <br>
+                    <div id="skalabel"></div>
+                    <div id="skalpha">
+
+
                     </div>
 
                 </div>
@@ -66,65 +70,48 @@
                     <input type="radio" name="redraw" id="redrawOn">on
 
                     <input type="radio" name="redraw" id="redrawOff">off
-                    <div id="hue">Hue
-                        <br>
-                    </div>
+                    <div id="huelabel"></div>
+                    <div id="hue">
 
-                    <div id="sat">Saturation
-                        <br>
                     </div>
-                    <div id="bri">Brightness
-                        <br>
+                    <div id="satlabel"></div>
+                    <div id="sat">
+                    </div>
+                    <div id="brilabel"></div>
+                    <div id="bri">
                     </div>
 
                     <div id="shape">Shape
                         <br>
                     </div>
+                    <div id="alphalabel"></div>
                     <div id="alpha">
-                        Opacity
-                        <br>
-                    </div>
 
-                    <div id="len">Chain Length
-                        <br>
+                    </div>
+                    <div id="lenlabel"></div>
+                    <div id="len">
+
                     </div>
                 </div>
-                 </div>
-                <div class="column one"></div>
+            </div>
+            <div class="column one"></div>
+
+
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="column three">
+            <div id="canvas-container">
 
 
             </div>
+
         </div>
-        <div class="row">
-
-            <div class="column three">
-                <div id="canvas-container">
+    </div>
 
 
-                </div>
 
-            </div>
-        </div>
-
-   
-
-    <script>
-        /*
-         * jQuery UI Dialog: Change Dialog Position
-         * http://salman-w.blogspot.com/2013/05/jquery-ui-dialog-examples.html
-         */
-        $(function () {
-            $("#dialog").dialog({
-                resizable: true,
-				width: "50%",
-                position: {
-                    my: "right top",
-                    at: "right top",
-                    of: window
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>
