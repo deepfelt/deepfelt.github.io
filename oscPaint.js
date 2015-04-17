@@ -3,7 +3,7 @@ var yPos = [];
 var sound, amplitude;
 var lifespan;
 var radius;
-var hue;
+
 var a = 0;
 var button;
 var bg = true;
@@ -11,7 +11,16 @@ var osc;
 var freq;
 var canvas;
 var redraw;
-var strokeWeight;
+var stroke_weight;
+var stroke_alpha;
+var xVel;
+var yVel;
+var aVel;
+var hueVal;
+var satVal;
+var briVal;
+var alphaVal;
+var chainLength;
 
 function setup() {
     "use strict";
@@ -47,6 +56,19 @@ function draw() {
     if (xPos.length > 0) {
         console.log(xPos.length)
     }
+    //    slider labels
+
+    $("#radlabel").text("radius: " + this.radius);
+    $("#xvlabel").text("x velocity: " + this.xVel);
+    $("#yvlabel").text("y velocity: " + this.yVel);
+    $("#avlabel").text("rotation speed: " + this.aVel);
+    $("#swtlabel").text("Stroke Weight: " + this.stroke_weight);
+    $("#skalabel").text("Stroke Opacity: " + this.stroke_alpha + "%");
+    $("#huelabel").text("Hue: " + int(this.hueVal / 2.55) + "%");
+    $("#satlabel").text("Saturation: " + int(this.satVal) + "%");
+    $("#brilabel").text("Brightness: " + int(this.briVal) + "%");
+    $("#alphalabel").text("Fill Opacity: " + int(this.alphaVal) + "%");
+    $("#lenlabel").text("Chain Length: " + this.chainLength);
 }
 
 function mouseDragged() {
@@ -65,15 +87,16 @@ function guiSetup() {
 
     radSlider = createSlider(10, 500);
     radSlider.parent("radius");
-     symSlider = createSlider(1, 4, 4);
+
+    symSlider = createSlider(1, 4, 4);
     symSlider.parent("symmetry");
-     xVelSlider = createSlider(-10, 10, 0);
+    xVelSlider = createSlider(-10, 10, 0);
     xVelSlider.parent("xvel");
-     yVelSlider = createSlider(-10, 10, 0);
+    yVelSlider = createSlider(-10, 10, 0);
     yVelSlider.parent("yvel");
-     aVelSlider = createSlider(-20, 20, 0);
+    aVelSlider = createSlider(-20, 20, 0);
     aVelSlider.parent("avel");
-     lengthSlider = createSlider(0, 300);
+    lengthSlider = createSlider(0, 300);
     lengthSlider.parent("len");
     shapeSlider = createSlider(0, 2, 2);
     shapeSlider.parent("shape");
@@ -84,11 +107,11 @@ function guiSetup() {
     satSlider.parent("sat");
     briSlider = createSlider(0, 100, 80);
     briSlider.parent("bri");
-    alphaSlider = createSlider(0,100,100);
+    alphaSlider = createSlider(0, 100, 100);
     alphaSlider.parent("alpha");
     strokeSlider = createSlider(0, 100, 2);
     strokeSlider.parent("swt");
-    strokeAlpha = createSlider(0,100,100);
+    strokeAlpha = createSlider(0, 100, 100);
     strokeAlpha.parent("skalpha");
 
 }
@@ -105,20 +128,28 @@ function mouseReleased() {
 }
 
 function fluctuator(size, rec) {
+
+
+
+
     var shapeDepth = shapeSlider.value();
     hueVal = hueSlider.value();
-    var satVal = satSlider.value();
-    var briVal = briSlider.value();
+    satVal = satSlider.value();
+    briVal = briSlider.value();
     var symPlanes = symSlider.value();
-    var chainLength = lengthSlider.value();
-    var alpha = alphaSlider.value();
-    strokeWeight(strokeSlider.value()/10);
-    var skalpha = strokeAlpha.value();
-    stroke(0, skalpha);
+    chainLength = lengthSlider.value();
+    alphaVal = alphaSlider.value();
+    stroke_weight = strokeSlider.value() / 10;
+    strokeWeight(stroke_weight);
+    stroke_alpha = strokeAlpha.value();
+    xVel = xVelSlider.value() / 10;
+    yVel = yVelSlider.value() / 10;
+    aVel = aVelSlider.value();
+    stroke(0, stroke_alpha);
     for (var i = 0; i < xPos.length; i++) {
 
-        xPos[i] += xVelSlider.value() / 10;
-        yPos[i] += yVelSlider.value() / 10;
+        xPos[i] += xVel;
+        yPos[i] += yVel;
         if (yPos[0] > height + radius || xPos[0] > width + radius || yPos[0] <
             0 - radius || xPos[0] < 0 -
             radius ||
@@ -131,7 +162,7 @@ function fluctuator(size, rec) {
         rectMode(CENTER);
         lifespan = 255;
         lifespan -= 1;
-        
+
         // noStroke();
 
         push();
@@ -193,7 +224,7 @@ function fluctuator(size, rec) {
 
             pop();
         }
-        a += 0.0001 * aVelSlider.value();
+        a += 0.0001 * aVel;
         if (symPlanes > 2) {
             fill(noise(yPos[i] / 100) * (hueVal), satVal, briVal, alpha)
             push();
@@ -233,3 +264,19 @@ function fluctuator(size, rec) {
     }
 
 }
+
+//<!--    jQuery UI dialog box-->
+
+
+$(function () {
+    $("#dialog").dialog({
+        resizable: true,
+        width: "50%",
+        position: {
+            my: "right top",
+            at: "right top",
+            of: window
+        }
+
+    });
+});
