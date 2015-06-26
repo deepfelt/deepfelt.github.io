@@ -33,7 +33,9 @@ function setup() {
 
 
   
-    canvas = createCanvas(screen.availWidth/2, screen.availHeight/2);
+
+    
+canvas = createCanvas(screen.availWidth/2, screen.availHeight*0.75);
 
     canvas.parent('canvas-container');
     background(0);
