@@ -21,6 +21,7 @@ var satVal;
 var briVal;
 var alphaVal;
 var chainLength;
+
 var shadows = false;
 var hueJitter;
 var sizeJitter;
@@ -29,7 +30,9 @@ var shaDepth;
 function setup() {
     "use strict";
     colorMode(HSB, 100);
+
     canvas = createCanvas(screen.availWidth/2, screen.availHeight*0.85);
+    canvas = createCanvas(500, 500);
     canvas.parent('canvas-container');
     background(0);
     guiSetup();
@@ -47,6 +50,7 @@ function draw() {
     //        freq = map(yPos[0], 0, height, 200, 300);
 
     bg = document.getElementById("redrawOn").checked;
+
     shadows = document.getElementById("shadowsOn").checked;
 
     if (bg) {
@@ -58,10 +62,12 @@ function draw() {
 
     radius = radSlider.value()
     fluctuator(radius);
+
 //    if (xPos.length > 0) {
 ////        console.log(xPos.length)
 //    }
-    //    slider labels
+  
+    //  create range slider labels
 
     $("#radlabel").text("radius: " + this.radius);
     $("#xvlabel").text("x velocity: " + this.xVel);
@@ -77,7 +83,7 @@ function draw() {
     $("#jitterlabel").text("Hue Jitter: " + (1100 - this.hueJitter));
     $("#shadepthlabel").text("Shadow Depth: " + (this.shaDepth));
 }
-
+    
 function mouseDragged() {
     if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
 
@@ -94,8 +100,10 @@ function guiSetup() {
 
     radSlider = createSlider(10, 500);
     radSlider.parent("radius");
+
     
      
+
     symSlider = createSlider(1, 4, 4);
     symSlider.parent("symmetry");
     xVelSlider = createSlider(-10, 10, 0);
@@ -108,6 +116,7 @@ function guiSetup() {
     lengthSlider.parent("len");
     shapeSlider = createSlider(0, 2, 2);
     shapeSlider.parent("shape");
+
     
     hueJitterSlider = createSlider(1, 1000);
     hueJitterSlider.parent("huejitter");
@@ -124,6 +133,7 @@ function guiSetup() {
     strokeSlider.parent("swt");
     strokeAlpha = createSlider(0, 100, 100);
     strokeAlpha.parent("skalpha");
+
     
     shadowSlider = createSlider(0,30);
     shadowSlider.parent("shadepth");
@@ -144,6 +154,7 @@ function mouseReleased() {
 function fluctuator(size, rec) {
 
 
+
    
     var ctx = document.getElementById("defaultCanvas").getContext('2d');
     shaDepth = shadowSlider.value()/100;
@@ -157,6 +168,8 @@ function fluctuator(size, rec) {
 
     }
     hueJitter = 1100 - hueJitterSlider.value();
+
+
     var shapeDepth = shapeSlider.value();
     hueVal = hueSlider.value();
     satVal = satSlider.value();
@@ -170,6 +183,7 @@ function fluctuator(size, rec) {
     xVel = xVelSlider.value() / 10;
     yVel = yVelSlider.value() / 10;
     aVel = aVelSlider.value();
+
     
     stroke(0, stroke_alpha);
     for (var i = 0; i < xPos.length; i++) {
@@ -196,7 +210,9 @@ function fluctuator(size, rec) {
         translate(xPos[i], yPos[i]);
         rotate(a);
 
+
         fill(noise(yPos[i] / hueJitter) * (hueVal), satVal, briVal, alphaVal);
+        fill(noise(yPos[i] / 1000) * (hueVal), satVal, briVal, alpha);
         if (shapeDepth >= 1) {
             rect(0, 0, noise(yPos[i] / 10) * size * sin(millis() / 1000),
                 noise(yPos[i] / 10) * size *
@@ -216,7 +232,9 @@ function fluctuator(size, rec) {
         translate(xPos[i], yPos[i]);
         rotate(a);
 
+
         fill(noise(yPos[i] / hueJitter) * (hueVal), satVal, briVal, alphaVal);
+        fill(noise(yPos[i] / 1000) * (hueVal), satVal, briVal, alpha);
         if (shapeDepth >= 1) {
             rect(0, 0, noise(yPos[i] / 10) * size * sin(millis() / 1000),
                 noise(yPos[i] / 10) * size *
@@ -233,7 +251,9 @@ function fluctuator(size, rec) {
         if (symPlanes > 1) {
             push();
 
+
             fill(noise(yPos[i] / hueJitter) * (hueVal), satVal, briVal, alphaVal)
+            fill(noise(yPos[i] / 1000) * (hueVal), satVal, briVal, alpha)
             translate(width - xPos[i], yPos[i]);
 
             rotate(-a);
@@ -252,7 +272,9 @@ function fluctuator(size, rec) {
         }
         a += 0.0001 * aVel;
         if (symPlanes > 2) {
+
             fill(noise(yPos[i] / hueJitter) * (hueVal), satVal, briVal, alphaVal)
+            fill(noise(yPos[i] / 100) * (hueVal), satVal, briVal, alpha)
             push();
             translate(yPos[i], xPos[i]);
             rotate(a);
@@ -294,15 +316,16 @@ function fluctuator(size, rec) {
 //<!--    jQuery UI dialog box-->
 
 
-$(function () {
-    $("#dialog").dialog({
-        resizable: true,
-        width: "50%",
-        position: {
-            my: "right top",
-            at: "right top",
-            of: window
-        }
-
-    });
-});
+//$(function () {
+//    $("#dialog").dialog({
+//        resizable: true,
+//        width: "50%",
+//        position: {
+//            my: "right top",
+//            at: "right top",
+//            of: window
+//        }
+//
+//    });
+//
+//});
