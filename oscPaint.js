@@ -31,7 +31,11 @@ function setup() {
     "use strict";
     colorMode(HSB, 100);
 
+<<<<<<< HEAD
     canvas = createCanvas(window.availWidth/2, window.availHeight*0.75);
+=======
+    canvas = createCanvas(screen.availWidth/2, screen.availHeight*0.75);
+>>>>>>> 1a3094964584d3a87f4eb87081d22258aec49afd
     canvas = createCanvas(500, 500);
     canvas.parent('canvas-container');
     background(0);
