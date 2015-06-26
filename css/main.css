@@ -9,6 +9,11 @@
     background-size: contain
 
 }
+html, body {
+ height: 100%;
+  overflow: hidden;  
+    
+}
 body > div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable.ui-resizable {
     max-width: 600px;
     background: #000;
@@ -241,4 +246,5 @@ ul {
 canvas {
 /*    border: outset 2px;*/
     cursor:crosshair;
+    overflow: hidden;
 }
