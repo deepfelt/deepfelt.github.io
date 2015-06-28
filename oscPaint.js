@@ -82,7 +82,7 @@ draw = function() {
   $('#brilabel').text('Brightness: ' + int(this.briVal) + '%');
   $('#alphalabel').text('Fill Opacity: ' + int(this.alphaVal) + '%');
   $('#lenlabel').text('Chain Length: ' + this.chainLength);
-  $('#jitterlabel').text('Hue Jitter: ' + this.hueJitter);
+  $('#jitterlabel').text('Hue Jitter: ' + (1100 - this.hueJitter));
   $('#shadepthlabel').text('Shadow Depth: ' + this.shaDepth);
 };
 
