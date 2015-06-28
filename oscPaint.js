@@ -170,7 +170,7 @@ fluctuator = function(size, rec) {
     translate(xPos[i], yPos[i]);
     rotate(a);
     fill(noise(yPos[i] / hueJitter) * hueVal, satVal, briVal, alphaVal);
-    fill(noise(yPos[i] / 1000) * hueVal, satVal, briVal, alpha);
+    
     if (shapeDepth >= 1) {
       rect(0, 0, noise(yPos[i] / 10) * size * sin(millis() / 1000), noise(yPos[i] / 10) * size * cos(a / 1000));
     }
@@ -182,7 +182,7 @@ fluctuator = function(size, rec) {
     translate(xPos[i], yPos[i]);
     rotate(a);
     fill(noise(yPos[i] / hueJitter) * hueVal, satVal, briVal, alphaVal);
-    fill(noise(yPos[i] / 1000) * hueVal, satVal, briVal, alpha);
+    
     if (shapeDepth >= 1) {
       rect(0, 0, noise(yPos[i] / 10) * size * sin(millis() / 1000), noise(yPos[i] / 10) * size * cos(a / 1000));
     }
@@ -193,7 +193,7 @@ fluctuator = function(size, rec) {
     if (symPlanes > 1) {
       push();
       fill(noise(yPos[i] / hueJitter) * hueVal, satVal, briVal, alphaVal);
-      fill(noise(yPos[i] / 1000) * hueVal, satVal, briVal, alpha);
+      
       translate(width - xPos[i], yPos[i]);
       rotate(-a);
       if (shapeDepth >= 1) {
@@ -207,7 +207,7 @@ fluctuator = function(size, rec) {
     a += 0.0001 * aVel;
     if (symPlanes > 2) {
       fill(noise(yPos[i] / hueJitter) * hueVal, satVal, briVal, alphaVal);
-      fill(noise(yPos[i] / 100) * hueVal, satVal, briVal, alpha);
+      
       push();
       translate(yPos[i], xPos[i]);
       rotate(a);
