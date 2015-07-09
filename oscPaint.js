@@ -59,7 +59,7 @@
   setup = function() {
     'use strict';
     colorMode(HSB, 100);
-    canvas = createCanvas(200, 200);
+    canvas = createCanvas(screen.availWidth, screen.availHeight);
     canvas.parent('canvas-container');
     background(0);
     guiSetup();
