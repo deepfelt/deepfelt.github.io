@@ -30,7 +30,7 @@ shaDepth = undefined
 setup = ->
   'use strict'
   colorMode HSB, 100
-  canvas = createCanvas(screen.availWidth , screen.availHeight )
+  canvas = createCanvas(600 , 600)
   canvas.parent 'canvas-container'
   background 0
   guiSetup()
